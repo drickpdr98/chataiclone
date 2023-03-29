@@ -1,24 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import axios from "axios";
 
 function App() {
+  const [prompt, setPrompt] = useState("");
+  const [result, setResult] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "https://api.openai.com/v1/engines/davinci-codex/completions",
+        {
+          prompt: prompt,
+          temperature: 0.5,
+          max_tokens: 100,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+          },
+        }
+      );
+      setResult(response.data.choices[0].text);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <main className="main">
+      <header className="header">
+        <h1>OpenAI Text Generator</h1>
       </header>
-    </div>
+      <div className="container">
+        <textarea
+          type="text"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="Type your prompt here..."
+          className="textarea"
+        ></textarea>
+
+        <button
+          onClick={handleClick}
+          disabled={loading || prompt.length === 0}
+          className="btn"
+        >
+          {loading ? "Generating..." : "Generate"}
+        </button>
+
+        <pre className="result">{result}</pre>
+      </div>
+    </main>
   );
 }
 
