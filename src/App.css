@@ -6,7 +6,11 @@
 
 body {
   font-family: "Arial", sans-serif;
-  background-color: #f3f3f3;
+  background-image: linear-gradient(
+    to right,
+    rgb(242, 112, 156),
+    rgb(255, 148, 114)
+  );
 }
 
 .main {
@@ -21,7 +25,7 @@ body {
 .header {
   font-size: 32px;
   font-weight: bold;
-  color: #444;
+  color: #fff; /* Changed to white */
   margin-bottom: 30px;
 }
 
@@ -34,32 +38,51 @@ body {
   min-height: 300px;
   resize: none;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #fff; /* Changed to white */
   padding: 10px;
   font-size: 16px;
   outline: none;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Added a transparent white background */
+  color: #fff; /* Changed to white */
 }
 
 .btn {
   width: 100%;
-  background-color: #ffa94d;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Changed to a transparent white background */
   color: white;
   padding: 10px;
   margin-top: 20px;
   font-size: 18px;
   border-radius: 5px;
-  border: none;
+  border: 1px solid #fff; /* Changed to white */
   cursor: pointer;
   outline: none;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn:hover {
-  background-color: #ffc078;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(
+    255,
+    255,
+    255,
+    0.6
+  ); /* Added a slightly brighter border color on hover */
 }
 
 .btn:disabled {
-  background-color: #ccc;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ccc;
   cursor: not-allowed;
 }
 
@@ -67,11 +90,17 @@ body {
   width: 100%;
   min-height: 300px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #fff; /* Changed to white */
   padding: 10px;
   margin-top: 20px;
   font-size: 16px;
   white-space: pre-wrap;
-  background-color: #fff;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Added a transparent white background */
+  color: #fff; /* Changed to white */
   overflow: auto;
 }
